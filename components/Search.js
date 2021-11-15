@@ -31,22 +31,24 @@ export default function Search() {
 
   return (
     <View style={styles.container}>
-            <TextInput style={{fontSize: 18, width: 200}} placeholder='ingredient'
+    <Text style={styles.textContainerSmall}>Search for different ingredients</Text>
+    <TextInput style={{fontSize: 18, width: 200}} placeholder='Search with ingredient'
         onChangeText={ingredients => setIngredients(ingredients)}></TextInput>
-      <Button style={styles.buttonContainer1} title="Search" onPress={fetchRecipes}></Button>
-      <FlatList
-        style={styles.listContainer}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) =>
-          <View>
-            <Text style={{fontSize: 18}}>{item.strMeal}</Text>
-            <Image
-              style={{width: 66, height: 58}}
-              source={{uri:item.strMealThumb}}>
-            </Image>
-          </View>}
-        data={recipes}
-        ItemSeparatorComponent={listSeparator} />
-    </View>
+            <Button style={styles.buttonContainer1} title="Search" onPress={fetchRecipes}></Button>
+        <FlatList
+            style={styles.listContainer}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) =>
+            <View>
+                <Text style={{fontSize: 18}}>{item.strMeal}</Text>
+                <Image
+                style={{width: 66, height: 58}}
+                source={{uri:item.strMealThumb}}>
+                </Image>
+            </View>}
+            data={recipes}
+            ItemSeparatorComponent={listSeparator} />
+</View>
+   
   );
 }

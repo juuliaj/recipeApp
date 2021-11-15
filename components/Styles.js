@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1, 
         backgroundColor: '#fff',
-        marginLeft : "5%"
+        fontSize: 20
     },
     buttonContainer1: {
         flex: 4,
@@ -21,8 +21,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         color: 'rgb(136, 136, 250)',
     },
+    textInput: {
+        fontSize: 30,
+
+    },
       textContainer: {
         fontSize: 30,
+        
+    },
+    textContainerSmall: {
+        fontSize: 20,
+        padding: 20,
     },
   });
 

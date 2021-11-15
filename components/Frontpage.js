@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Styles.js';
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import { FlatList, Text, View, Image } from 'react-native';
 
 
 export default function Frontpage() {
 
   const [recipes, setRecipes] = useState('');
 
-  useEffect(() =>{
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=a`)
+  useEffect(() => {
+    fetch(`https://https://www.themealdb.com/api/json/v1/1/categories.php`)
     .then(response=> response.json())
-    .then(responseJson => setRecipes(responseJson.meals))
+    .then(responseJson => setRecipes(responseJson.categories))
     .catch((e) => console.log(e))
     }, []);
+    
 
    const listSeparator = () => {
     return (
@@ -35,11 +36,8 @@ export default function Frontpage() {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) =>
                 <View>
-                    <Text style={{fontSize: 18}}>{item.strMeal}</Text>
-                    <Image
-                    style={{width: 66, height: 58}}
-                    source={{uri:item.strMealThumb}}>
-                    </Image>
+                    <Text style={{fontSize: 18}}>{item.strCategory}</Text>
+                   
                 </View>}
                 data={recipes}
                 ItemSeparatorComponent={listSeparator} />
