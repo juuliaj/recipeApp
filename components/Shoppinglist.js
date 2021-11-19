@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TextInput, FlatList, Alert } from 'react-native';
 import styles from './Styles.js';
 import { initializeApp } from 'firebase/app';
-import{ getDatabase, push, ref, onValue }  from"firebase/database";
+import{ getDatabase, push, ref, onValue, remove }  from"firebase/database";
 
 
 const firebaseConfig = {
@@ -30,7 +30,12 @@ export default function Shoppinglist() {
     const itemsRef = ref(database, 'items/')
       onValue(itemsRef, (snapshot) => {
         const data = snapshot.val();
-        setItems(Object.values(data));
+        if (data === null) {
+          setProduct('');
+          setAmount('');
+        } else {
+          setItems(Object.values(data));
+        }
       })
   }, []);
 
@@ -40,16 +45,23 @@ export default function Shoppinglist() {
     });
   }
 
+  const deleteItem = () => {
+    remove(ref(database, 'items/'), {
+      'product': product, 'amount': amount
+    });
+  }
+
   return (
     <View style={styles.container}>
       <TextInput placeholder="Product" style={styles.textInput} onChangeText={product => setProduct(product)} value={product} />
-      <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount} />
+      <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount}  />
       <Button style={styles.buttonContainer1} onPress={saveItem} title="Add to shopping list" />
+      <Button style={styles.buttonContainer1} onPress={deleteItem} title="Delete items" />
       <FlatList
         data={items}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) =>
-          <Text style={styles.listContainer} >{item.product}, {item.amount}</Text>
+          <Text style={styles.listContainer} >{item.product}, {item.amount} kpl</Text>
         }
       />
       <StatusBar style="auto" />
