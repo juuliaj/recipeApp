@@ -31,8 +31,6 @@ export default function Shoppinglist() {
       onValue(itemsRef, (snapshot) => {
         const data = snapshot.val();
         if (data === null) {
-          setProduct('');
-          setAmount('');
         } else {
           setItems(Object.values(data));
         }
@@ -43,12 +41,15 @@ export default function Shoppinglist() {
     push(ref(database, 'items/'), {
       'product': product, 'amount': amount
     });
+    setProduct('');
+    setAmount('');
   }
 
   const deleteItem = () => {
     remove(ref(database, 'items/'), {
       'product': product, 'amount': amount
     });
+    setItems([]);
   }
 
   return (
