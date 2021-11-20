@@ -45,7 +45,23 @@ export default function Shoppinglist() {
     setAmount('');
   }
 
-  const deleteItem = () => {
+  const deleteAll = () => {
+    Alert.alert(
+      'Shoppinglist',
+      'Delete all products from shoppinglist?',
+      [
+        {text: 'NO', onPress: () => Alert.alert('Shoppinglist', 'Nothing deleted'), style: 'cancel'},
+        {text: 'YES', onPress: () => {
+          remove(ref(database, 'items/'), {
+            'product': product, 'amount': amount
+          })
+          setItems([]);
+        }},
+      ]
+    )
+  }
+
+  const deleteItem = (items) => {
     remove(ref(database, 'items/'), {
       'product': product, 'amount': amount
     });
@@ -57,7 +73,7 @@ export default function Shoppinglist() {
       <TextInput placeholder="Product" style={styles.textInput} onChangeText={product => setProduct(product)} value={product} />
       <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount}  />
       <Button style={styles.buttonContainer1} onPress={saveItem} title="Add to shopping list" />
-      <Button style={styles.buttonContainer1} onPress={deleteItem} title="Delete items" />
+      <Button style={styles.buttonContainer1} onPress={deleteAll} title="Delete items" />
       <FlatList
         data={items}
         keyExtractor={(item, index) => index.toString()}
