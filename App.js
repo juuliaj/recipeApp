@@ -2,20 +2,30 @@ import React from 'react';
 import Search from './components/Search';
 import Frontpage from './components/Frontpage';
 import Shoppinglist from './components/Shoppinglist';
-import { NavigationContainer} from '@react-navigation/native';
+import Recipe from './components/Recipe';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack'
+import {createAppContainer } from 'react-navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-
-
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-export default function App() {
+const MainStackNavigator = () => {
   return (
-   <NavigationContainer>
-     <Tab.Navigator>
-       <Tab.Screen 
+    <Stack.Navigator>
+      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="Recipe" component={Recipe} />
+    </Stack.Navigator>
+  );
+}
+
+const BottomTabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen 
         name="Frontpage" 
         component={Frontpage} 
         options= {{
@@ -25,7 +35,7 @@ export default function App() {
       />
        <Tab.Screen 
         name="Search" 
-        component={Search}
+        component={MainStackNavigator}
         options= {{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="search1" size={24} color="black" />
@@ -39,10 +49,19 @@ export default function App() {
             <AntDesign name="shoppingcart" size={24} color="black" />
           )}} 
       />
-     </Tab.Navigator>
+    </Tab.Navigator>
+  );
+};
+
+
+export default function App() {
+  return (
+   <NavigationContainer>
+     <BottomTabNavigator/>
    </NavigationContainer>
   );
 }
+
 
 
 

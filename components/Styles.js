@@ -4,14 +4,14 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
       justifyContent: 'center',
-      padding: 50,
+      alignItems: 'center',
+      padding: 30,
     },
     listContainer: {
         flex: 1, 
         backgroundColor: '#fff',
-        fontSize: 20
+        fontSize: 30,
     },
     buttonContainer1: {
         flex: 4,
