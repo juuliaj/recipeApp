@@ -5,10 +5,10 @@ import { Alert, Button, FlatList, Text, TextInput, View, Image, TouchableNativeF
 export default function Search({ navigation }) {
 
   const [recipes, setRecipes] = useState('');
-  const [ingredients, setIngredients] = useState('');
+  const [name, setName] = useState('');
 
   const fetchRecipes = () => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
       .then(response => response.json())
       .then(responseJson => setRecipes(responseJson.meals))
       .catch((error) => {
@@ -24,7 +24,7 @@ export default function Search({ navigation }) {
           style={{ width: 80, height: 80 }}
           source={{ uri: item.strMealThumb }}>
         </Image>
-        <TouchableNativeFeedback style={{ flex: 0.5, borderColor: "black", borderWidth: 1 }} onPress={() => navigation.navigate('Recipe')}>
+        <TouchableNativeFeedback style={{ flex: 0.5, borderColor: "black", borderWidth: 1 }} onPress={() => navigation.navigate('Recipe', { meal: item })}>
           <Text style={styles.listContainer}>{item.strMeal}</Text>
         </TouchableNativeFeedback>
       </View>
@@ -44,9 +44,9 @@ export default function Search({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textContainerSmall}>Search for different ingredients</Text>
+      <Text style={styles.textContainerSmall}>Search for different recipes</Text>
       <TextInput style={{ fontSize: 18, width: 200 }} placeholder='Search with ingredient'
-        onChangeText={ingredients => setIngredients(ingredients)}></TextInput>
+        onChangeText={name => setName(name)}></TextInput>
       <Button style={styles.buttonContainer1} title="Search" onPress={fetchRecipes}></Button>
       <FlatList
         style={styles.listContainer}
