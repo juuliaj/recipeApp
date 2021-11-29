@@ -4,20 +4,9 @@ import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 export default function Recipe({ route, navigation }) {
 
   const { meal } = route.params;
-  const [name, setName] = useState();
-  const [category, setCategory] = useState();
-  const [recipe, setRecipe] = useState();
-
-  useEffect(() => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`)
-      .then(response => response.json())
-      .then(data => {
-        setName(meal.strMeal)
-        setCategory(meal.strCategory)
-        setRecipe(meal.strInstructions)
-      })
-      .catch((e) => console.error(e))
-  }, []);
+  const [name, setName] = useState(meal.strMeal);
+  const [category, setCategory] = useState(meal.strCategory);
+  const [recipe, setRecipe] = useState(meal.strInstructions);
 
   return (
     <View style={styles.container}>
