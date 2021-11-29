@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Styles.js';
-import { FlatList, Text, View, Image } from 'react-native';
+import { FlatList, Text, View, Image, ImageBackground } from 'react-native';
 
 
 export default function Frontpage() {
@@ -15,36 +15,44 @@ export default function Frontpage() {
   }, []);
 
 
-  const listSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "80%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "90%"
-        }}
-      ></View>
-    )
-  }
+  const renderSeparator = () => (
+    <View
+      style={{
+        backgroundColor: 'lightgrey',
+        width: "80%",
+        marginLeft: "90%"
+      }}
+    />
+  )
 
   return (
     <View style={styles.container}>
       <Text style={styles.textContainer}>Welcome to RecipeApp!</Text>
       <Text style={styles.textContainerSmall}>We currently have different recipes within these categories:</Text>
       <FlatList
-        style={styles.listContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) =>
           <View>
-            <Text style={styles.listContainer}>{item.strCategory}</Text>
-            <Image
-              style={{ width: 80, height: 80 }}
-              source={{ uri: item.strCategoryThumb }}>
-            </Image>
+            <ImageBackground source={{ uri: item.strCategoryThumb }} style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'stretch',
+              width: '100%', height: 150
+            }} blurRadius={3}>
+              <View style={{ 
+                position: 'absolute', 
+                top: 0, 
+                left: 0, 
+                right: 0, 
+                bottom: 0, 
+                justifyContent: 'center', 
+                alignItems: 'center' }}>
+                <Text style={styles.headerContainer}>{item.strCategory}</Text>
+              </View>
+            </ImageBackground>
           </View>}
         data={recipes}
-        ItemSeparatorComponent={listSeparator} />
+        ItemSeparatorComponent={renderSeparator} />
     </View>
   );
 }

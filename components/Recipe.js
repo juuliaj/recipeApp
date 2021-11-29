@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import styles from './Styles.js';
+import { ScrollView, Text, View, Image, ImageBackground } from 'react-native';
 
-export default function Recipe({ route, navigation }) {
+export default function Recipe({ route }) {
 
   const { meal } = route.params;
   const [name, setName] = useState(meal.strMeal);
@@ -10,31 +11,19 @@ export default function Recipe({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>{name}</Text>
-      <Image
-        style={styles.imageContainer}
-        source={{ uri: meal.strMealThumb }}
-        resizeMode='contain'
-      />
-      <Text>{category}</Text>
-      <Text>{recipe}</Text>
+      <ScrollView>
+        <Text style={styles.recipeContainerBig}>{name}</Text>
+          <Image
+            style={{
+              width: 380,
+              height: 380 }}
+            source={{ uri: meal.strMealThumb }}
+            resizeMode='contain'
+          />
+        <Text style={styles.textContainer}>Food category: {category}</Text>
+        <Text style={styles.recipeContainerText}>{recipe}</Text>
+      </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    margin: 12,
-  },
-  imageContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    width: '100%',
-  },
-});

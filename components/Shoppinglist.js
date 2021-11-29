@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TextInput, FlatList, Alert } from 'react-native';
 import styles from './Styles.js';
@@ -81,7 +80,6 @@ export default function Shoppinglist() {
           <Text style={styles.listContainer} >{item.product}, {item.amount} kpl</Text>
         }
       />
-      <StatusBar style="auto" />
     </View>
   );
 }
