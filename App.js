@@ -19,7 +19,7 @@ const MainStackNavigator = () => {
     <Stack.Navigator >
       <Stack.Screen options={{headerTransparent: true, headerTitle:""}} name="Search" component={Frontpage} />
       <Stack.Screen options={{headerTransparent: true, headerTitle:""}} name="Categories" component={Categories} />
-      <Stack.Screen name="FrontPageRecipe" component={FrontPageRecipe} />
+      <Stack.Screen options={{headerTitle:""}} name="FrontPageRecipe" component={FrontPageRecipe} />
     </Stack.Navigator>
   );
 }
@@ -27,8 +27,8 @@ const MainStackNavigator = () => {
 const SearchStackNavigator = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen options={{headerShown: false}} name="Back to search" component={Search} />
-      <Stack.Screen name="Recipe" component={Recipe} />
+      <Stack.Screen options={{headerShown: false, headerTitle:""}} name="Back to search" component={Search} />
+      <Stack.Screen options={{headerTitle:""}} name="Recipe" component={Recipe} />
     </Stack.Navigator>
   );
 }

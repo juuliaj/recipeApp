@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TextInput, FlatList, Alert, TouchableOpacity } from 'react-native';
 import styles from './Styles.js';
 import { initializeApp } from 'firebase/app';
-import{ getDatabase, push, ref, onValue, remove }  from"firebase/database";
+import { getDatabase, push, ref, onValue, remove } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -25,15 +25,15 @@ export default function Shoppinglist() {
   const [amount, setAmount] = useState('');
   const [items, setItems] = useState([]);
 
-  useEffect(() =>  {
+  useEffect(() => {
     const itemsRef = ref(database, 'items/')
-      onValue(itemsRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data === null) {
-        } else {
-          setItems(Object.values(data));
-        }
-      })
+    onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data === null) {
+      } else {
+        setItems(Object.values(data));
+      }
+    })
   }, []);
 
   const saveItem = () => {
@@ -49,13 +49,15 @@ export default function Shoppinglist() {
       'Shoppinglist',
       'Delete all products from shoppinglist?',
       [
-        {text: 'NO', onPress: () => Alert.alert('Shoppinglist', 'Nothing deleted'), style: 'cancel'},
-        {text: 'YES', onPress: () => {
-          remove(ref(database, 'items/'), {
-            'product': product, 'amount': amount
-          })
-          setItems([]);
-        }},
+        { text: 'NO', onPress: () => Alert.alert('Shoppinglist', 'Nothing deleted'), style: 'cancel' },
+        {
+          text: 'YES', onPress: () => {
+            remove(ref(database, 'items/'), {
+              'product': product, 'amount': amount
+            })
+            setItems([]);
+          }
+        },
       ]
     )
   }
@@ -64,26 +66,25 @@ export default function Shoppinglist() {
     const itemsRef = ref(database, 'items/');
 
     onValue(itemsRef, (snapshot) => {
-        snapshot.forEach((childSnap) => {
-            if (childSnap.val().product === product) {
-                const deleteRef = ref(database, 'items/' + childSnap.key);
-                remove(deleteRef)
-                    .then(function () {
-                        console.log("Remove succeeded.")
-                    })
-                    .catch(function (error) {
-                        console.log("Remove failed: " + error.message)
-                    });
-
-            }
-        })
+      snapshot.forEach((childSnap) => {
+        if (childSnap.val().product === product) {
+          const deleteRef = ref(database, 'items/' + childSnap.key);
+          remove(deleteRef)
+            .then(function () {
+              console.log("Remove succeeded.")
+            })
+            .catch(function (error) {
+              console.log("Remove failed: " + error.message)
+            });
+        }
+      })
     })
-}
+  }
 
   return (
     <View style={styles.container}>
       <TextInput placeholder="Product" style={styles.textInput} onChangeText={product => setProduct(product)} value={product} />
-      <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount}  />
+      <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount} />
       <TouchableOpacity onPress={saveItem} style={styles.button}>
         <Text>Add to shoppinglist</Text>
       </TouchableOpacity>
@@ -94,11 +95,11 @@ export default function Shoppinglist() {
         data={items}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) =>
-        <View style={styles.shoppingListContainer}>
-          <Text style={styles.listContainer}>{item.product}, {item.amount} kpl</Text>
-          <TouchableOpacity onPress={() => deleteItem(item.product)}  style={styles.button}>
-        <Text>Delete</Text>
-      </TouchableOpacity>
+          <View style={styles.shoppingListContainer}>
+            <Text style={styles.listContainer}>{item.product}, {item.amount} kpl</Text>
+            <TouchableOpacity onPress={() => deleteItem(item.product)} style={styles.button}>
+              <Text>Delete</Text>
+            </TouchableOpacity>
           </View>
         }
       />

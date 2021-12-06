@@ -16,14 +16,23 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'rgb(255,250,244)',
   },
+  ingredientContainer: {
+    flex: 1,
+    flexDirection: 'row', 
+    flexWrap: "wrap",
+    justifyContent: 'space-between',
+    padding: 10,
+    fontWeight: "bold"
+  },
   shoppingListContainer: {
     flex: 1,
     width: 350,
+    flexDirection: 'row',
     fontSize: 30,
     borderRadius: 50,
     padding: 10,
-    flexDirection: 'row', 
-    padding: 15,
+    marginTop: 10,
+    marginBottom: 10,
     backgroundColor: 'rgb(255,250,244)',
   },
   buttonContainer1: {
@@ -70,11 +79,12 @@ const styles = StyleSheet.create({
   },
   recipeContainerBig: {
     fontSize: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   recipeContainerText: {
     fontSize: 15,
+    padding: 10,
   }
 });
 
