@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Styles.js';
-import { ScrollView, Text, View, Image, ImageBackground } from 'react-native';
+import { ScrollView, Text, View, Image } from 'react-native';
 
 export default function Recipe({ route }) {
 

@@ -16,6 +16,16 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'rgb(255,250,244)',
   },
+  shoppingListContainer: {
+    flex: 1,
+    width: 350,
+    fontSize: 30,
+    borderRadius: 50,
+    padding: 10,
+    flexDirection: 'row', 
+    padding: 15,
+    backgroundColor: 'rgb(255,250,244)',
+  },
   buttonContainer1: {
     flex: 4,
     width: 200,
@@ -23,6 +33,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     borderRadius: 50,
+  },
+  button: {
+    width: "40%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: "rgb(104,168,102)",
   },
   imageContainer: {
     flex: 1,
@@ -33,7 +53,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 30,
-
+    marginTop: 15,
+    marginBottom: 15,
   },
   textContainer: {
     fontSize: 30,

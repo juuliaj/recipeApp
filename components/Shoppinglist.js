@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, TextInput, FlatList, Alert } from 'react-native';
+import { Text, View, Button, TextInput, FlatList, Alert, TouchableOpacity } from 'react-native';
 import styles from './Styles.js';
 import { initializeApp } from 'firebase/app';
 import{ getDatabase, push, ref, onValue, remove }  from"firebase/database";
@@ -60,24 +60,46 @@ export default function Shoppinglist() {
     )
   }
 
-  const deleteItem = (items) => {
-    remove(ref(database, 'items/'), {
-      'product': product, 'amount': amount
-    });
-    setItems([]);
-  }
+  const deleteItem = (product) => {
+    const itemsRef = ref(database, 'items/');
+
+    onValue(itemsRef, (snapshot) => {
+        snapshot.forEach((childSnap) => {
+            if (childSnap.val().product === product) {
+                const deleteRef = ref(database, 'items/' + childSnap.key);
+                remove(deleteRef)
+                    .then(function () {
+                        console.log("Remove succeeded.")
+                    })
+                    .catch(function (error) {
+                        console.log("Remove failed: " + error.message)
+                    });
+
+            }
+        })
+    })
+}
 
   return (
     <View style={styles.container}>
       <TextInput placeholder="Product" style={styles.textInput} onChangeText={product => setProduct(product)} value={product} />
       <TextInput placeholder="Amount" style={styles.textInput} onChangeText={amount => setAmount(amount)} value={amount}  />
-      <Button style={styles.buttonContainer1} onPress={saveItem} title="Add to shopping list" />
-      <Button style={styles.buttonContainer1} onPress={deleteAll} title="Delete items" />
+      <TouchableOpacity onPress={saveItem} style={styles.button}>
+        <Text>Add to shoppinglist</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={deleteAll} style={styles.button}>
+        <Text>Delete items</Text>
+      </TouchableOpacity>
       <FlatList
         data={items}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) =>
-          <Text style={styles.listContainer} >{item.product}, {item.amount} kpl</Text>
+        <View style={styles.shoppingListContainer}>
+          <Text style={styles.listContainer}>{item.product}, {item.amount} kpl</Text>
+          <TouchableOpacity onPress={() => deleteItem(item.product)}  style={styles.button}>
+        <Text>Delete</Text>
+      </TouchableOpacity>
+          </View>
         }
       />
     </View>

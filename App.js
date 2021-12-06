@@ -3,6 +3,8 @@ import Search from './components/Search';
 import Frontpage from './components/Frontpage';
 import Shoppinglist from './components/Shoppinglist';
 import Recipe from './components/Recipe';
+import Categories from './components/Categories';
+import FrontPageRecipe from './components/FrontPageRecipe'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack'
@@ -15,7 +17,17 @@ const Stack = createStackNavigator();
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen options={{headerShown: false}}  name="Back to search" component={Search} />
+      <Stack.Screen options={{headerTransparent: true, headerTitle:""}} name="Search" component={Frontpage} />
+      <Stack.Screen options={{headerTransparent: true, headerTitle:""}} name="Categories" component={Categories} />
+      <Stack.Screen name="FrontPageRecipe" component={FrontPageRecipe} />
+    </Stack.Navigator>
+  );
+}
+
+const SearchStackNavigator = () => {
+  return (
+    <Stack.Navigator >
+      <Stack.Screen options={{headerShown: false}} name="Back to search" component={Search} />
       <Stack.Screen name="Recipe" component={Recipe} />
     </Stack.Navigator>
   );
@@ -26,7 +38,7 @@ const BottomTabNavigator = () => {
     <Tab.Navigator>
       <Tab.Screen 
         name="Frontpage" 
-        component={Frontpage} 
+        component={MainStackNavigator} 
         options= {{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="food-variant" size={24} color="black" />
@@ -37,7 +49,7 @@ const BottomTabNavigator = () => {
       />
        <Tab.Screen 
         name="Search" 
-        component={MainStackNavigator}
+        component={SearchStackNavigator}
         options= {{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="search1" size={24} color="black" />

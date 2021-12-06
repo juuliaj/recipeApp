@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Styles.js';
-import { FlatList, Text, View, Image, ImageBackground } from 'react-native';
+import { FlatList, Text, View, ImageBackground, TouchableNativeFeedback } from 'react-native';
 
 
-export default function Frontpage() {
+export default function Frontpage({ navigation }) {
 
   const [recipes, setRecipes] = useState('');
 
@@ -25,14 +25,11 @@ export default function Frontpage() {
     />
   )
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.textContainer}>Welcome to RecipeApp!</Text>
-      <Text style={styles.textContainerSmall}>We currently have different recipes within these categories:</Text>
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) =>
-          <View>
+  const renderItem = ({ item }) => (
+    <View >
+      <View>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Categories', { meal: item })}>
+        <View>
             <ImageBackground source={{ uri: item.strCategoryThumb }} style={{
               flex: 1,
               flexDirection: 'row',
@@ -50,7 +47,18 @@ export default function Frontpage() {
                 <Text style={styles.headerContainer}>{item.strCategory}</Text>
               </View>
             </ImageBackground>
-          </View>}
+          </View>
+        </TouchableNativeFeedback>
+      </View>
+    </View>
+  )
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.textContainer}>Welcome to the RecipeApp!</Text>
+      <FlatList
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={renderItem}
         data={recipes}
         ItemSeparatorComponent={renderSeparator} />
     </View>
