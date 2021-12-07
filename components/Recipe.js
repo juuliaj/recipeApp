@@ -111,7 +111,9 @@ export default function Recipe({ route }) {
         <Image
           style={{
             width: 380,
-            height: 380
+            height: 380,
+            borderRadius: 15,
+            marginLeft: 5
           }}
           source={{ uri: meal.strMealThumb }}
           resizeMode='contain'

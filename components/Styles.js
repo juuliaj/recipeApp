@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: 350,
     flexDirection: 'row',
     fontSize: 30,
-    borderRadius: 50,
+    borderRadius: 20,
     padding: 10,
     marginTop: 10,
     marginBottom: 10,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   button: {
-    width: "40%",
+    width: "30%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'stretch',
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   textInput: {
     fontSize: 30,

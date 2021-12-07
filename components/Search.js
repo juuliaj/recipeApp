@@ -7,6 +7,7 @@ export default function Search({ navigation }) {
 
   const [recipes, setRecipes] = useState('');
   const [name, setName] = useState('');
+  const [text, setText] = useState('Your random recipe of the day!');
 
   useEffect(() => {
     fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
@@ -19,7 +20,7 @@ export default function Search({ navigation }) {
   const fetchRecipes = () => {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
       .then(response => response.json())
-      .then(responseJson => setRecipes(responseJson.meals))
+      .then(responseJson => { setRecipes(responseJson.meals), setText('')})
       .catch((error) => {
         Alert.alert('Error', error);
       });
@@ -34,7 +35,7 @@ export default function Search({ navigation }) {
       <View>
         <TouchableNativeFeedback style={{ flex: 0.5, borderColor: "black", borderWidth: 1 }} onPress={() => navigation.navigate('Recipe', { meal: item })}>
           <Image
-            style={{ width: 80, height: 80 }}
+            style={{ width: 80, height: 80, borderRadius: 10, }}
             source={{ uri: item.strMealThumb }}>
           </Image>
         </TouchableNativeFeedback>
@@ -55,12 +56,12 @@ export default function Search({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textContainer}>Search for different recipes</Text>
-      <View style={{flexDirection: 'row', padding: 15}}>
-      <TextInput style={{ fontSize: 18, width: 200 }} placeholder='Search with ingredient'
+      <View style={{flexDirection: 'row', padding: 15, marginTop: 20}}>
+      <TextInput style={{ fontSize: 18, width: 200 }} placeholder='Search for recipes'
         onChangeText={name => setName(name)}></TextInput>
        <AntDesign name="search1" size={30} color="black" onPress={fetchRecipes}/>
        </View>
+       <Text style={{ fontSize: 20, padding: 20 }}>{text}</Text>
       <FlatList
         style={styles.listContainer}
         keyExtractor={(item, index) => index.toString()}

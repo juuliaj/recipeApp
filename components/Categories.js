@@ -23,7 +23,7 @@ export default function Categories({ route, navigation }) {
       <View>
       <TouchableNativeFeedback style={{ flex: 0.5, borderColor: "black", borderWidth: 1 }} onPress={() => navigation.navigate('FrontPageRecipe', { meal: item })}>
           <Image
-            style={{ width: 80, height: 80 }}
+            style={{ width: 80, height: 80, borderRadius: 10, }}
             source={{ uri: item.strMealThumb }}>
           </Image>
         </TouchableNativeFeedback>
