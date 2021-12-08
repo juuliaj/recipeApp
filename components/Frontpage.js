@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Styles.js';
 import { FlatList, Text, View, ImageBackground, TouchableNativeFeedback } from 'react-native';
-
+import styles from './Styles';
 
 export default function Frontpage({ navigation }) {
 
@@ -55,12 +54,16 @@ export default function Frontpage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textContainer}>Welcome to the RecipeApp!</Text>
+      <ImageBackground source={require('../assets/backround.png')} resizeMode="cover" style={styles.image}>
+                  <View style={styles.appView}>
+      <Text style={styles.textContainer}>Hello ! Welcome to the RecipeApp!</Text>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
         data={recipes}
         ItemSeparatorComponent={renderSeparator} />
+        </View>
+        </ImageBackground>
     </View>
   );
 }

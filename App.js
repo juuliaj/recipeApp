@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Search from './components/Search';
 import Frontpage from './components/Frontpage';
 import Shoppinglist from './components/Shoppinglist';
 import Recipe from './components/Recipe';
+import Login from './components/Login';
+import Register from './components/Register';
 import Categories from './components/Categories';
 import FrontPageRecipe from './components/FrontPageRecipe'
 import { NavigationContainer } from '@react-navigation/native';
+import { signIn, store } from './components/SigninReducer';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -13,6 +16,32 @@ import { AntDesign } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+const AuthStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerStyle: {
+            backgroundColor: 'rgb(104,168,102)',
+          },
+          headerTitle: ""
+        }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{
+          headerStyle: {
+            backgroundColor: 'rgb(104,168,102)',
+          }
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const MainStackNavigator = () => {
   return (
@@ -35,7 +64,16 @@ const SearchStackNavigator = () => {
 
 const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+    tabBarOptions={{
+       activeTintColor: 'black',
+       activeBackgroundColor: 'rgb(101, 150, 99)',
+       inactiveBackgroundColor: 'rgb(104,168,102)',
+       tabBarStyle: [{
+        "display": "flex"
+       }]
+    }}
+>
       <Tab.Screen 
         name="Frontpage" 
         component={MainStackNavigator} 
@@ -45,7 +83,17 @@ const BottomTabNavigator = () => {
           ),
           headerStyle: {
             backgroundColor: 'rgb(104,168,102)',
-          }}} 
+          },
+          headerRight: () => (
+            <AntDesign.Button
+              onPress={() => store.dispatch(signIn(false))}
+              color="black"
+              backgroundColor="rgb(104,168,102)"
+              name="logout"
+              size={28}
+            />
+          ),
+        }} 
       />
        <Tab.Screen 
         name="Search" 
@@ -56,7 +104,17 @@ const BottomTabNavigator = () => {
           ),
           headerStyle: {
             backgroundColor: 'rgb(104,168,102)',
-          }}} 
+          },
+          headerRight: () => (
+            <AntDesign.Button
+              onPress={() => store.dispatch(signIn(false))}
+              color="black"
+              backgroundColor="rgb(104,168,102)"
+              name="logout"
+              size={28}
+            />
+          ),
+        }} 
       />
       <Tab.Screen 
         name="Shoppinglist" 
@@ -67,7 +125,17 @@ const BottomTabNavigator = () => {
           ),
           headerStyle: {
             backgroundColor: 'rgb(104,168,102)',
-          }}} 
+          },
+          headerRight: () => (
+            <AntDesign.Button
+              onPress={() => store.dispatch(signIn(false))}
+              color="black"
+              backgroundColor="rgb(104,168,102)"
+              name="logout"
+              size={28}
+            />
+          ),
+        }} 
       />
     </Tab.Navigator>
   );
@@ -75,11 +143,21 @@ const BottomTabNavigator = () => {
 
 
 export default function App() {
+
+  const [isSigned, setIsSigned] = useState(false);
+
+  // Update state from redux
+  store.subscribe(() => {
+    setIsSigned(store.getState());
+  })
+
   return (
-   <NavigationContainer>
-     <BottomTabNavigator/>
-   </NavigationContainer>
+    // Check if 'isSigned' is true and change the path from 'Login' to 'Search' if true    
+    <NavigationContainer>
+      {isSigned ? <BottomTabNavigator /> : <AuthStack />}
+    </NavigationContainer>
   );
+
 }
 
 

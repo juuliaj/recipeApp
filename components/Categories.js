@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Styles.js';
-import { ScrollView, Text, View, Image, FlatList, TouchableNativeFeedback } from 'react-native';
+import { ScrollView, Text, View, Image, FlatList, TouchableNativeFeedback, ImageBackground } from 'react-native';
 
 export default function Categories({ route, navigation }) {
 
@@ -44,6 +44,8 @@ export default function Categories({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <ImageBackground source={require('../assets/backround.png')} resizeMode="cover" style={styles.image}>
+                <View style={styles.appView}>
       <Text style={styles.textContainer}>Foods from {name} category</Text>
       <FlatList
         style={styles.listContainer}
@@ -51,6 +53,8 @@ export default function Categories({ route, navigation }) {
         renderItem={renderItem}
         data={recipes}
         ItemSeparatorComponent={renderSeparator} />
+        </View>
+        </ImageBackground>
     </View>
   );
 }

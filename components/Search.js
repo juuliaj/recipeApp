@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Styles.js';
 import { AntDesign } from '@expo/vector-icons';
-import { Alert, Button, FlatList, Text, TextInput, View, Image, TouchableNativeFeedback } from 'react-native';
+import { Alert, Button, FlatList, Text, TextInput, View, Image, TouchableNativeFeedback, ImageBackground } from 'react-native';
 
 export default function Search({ navigation }) {
 
@@ -56,6 +56,8 @@ export default function Search({ navigation }) {
 
   return (
     <View style={styles.container}>
+                  <ImageBackground source={require('../assets/backround.png')} resizeMode="cover" style={styles.image}>
+                  <View style={styles.appView}>
       <View style={{flexDirection: 'row', padding: 15, marginTop: 20}}>
       <TextInput style={{ fontSize: 18, width: 200 }} placeholder='Search for recipes'
         onChangeText={name => setName(name)}></TextInput>
@@ -68,6 +70,8 @@ export default function Search({ navigation }) {
         renderItem={renderItem}
         data={recipes}
         ItemSeparatorComponent={renderSeparator} />
+        </View>
+        </ImageBackground>
     </View>
 
   );

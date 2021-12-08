@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
   listContainer: {
     flex: 1,
@@ -60,6 +59,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    width: '100%',
+    height: '100%',
+  },
   textInput: {
     fontSize: 30,
     marginTop: 15,
@@ -72,6 +77,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     fontSize: 30,
     fontWeight: 'bold',
+    padding: 20
   },
   textContainerSmall: {
     fontSize: 15,
@@ -82,8 +88,46 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
+  loginView: {
+    backgroundColor: "#fff",
+    borderRadius: 30,
+    marginLeft: 20,
+    width: "90%",
+    height: "60%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  appView: {
+    backgroundColor: "#fff",
+    borderRadius: 30,
+    marginLeft: 20,
+    width: "90%",
+    height: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: 'black',
+  },
   recipeContainerText: {
     fontSize: 15,
+    padding: 10,
+  },
+  inputView: {
+    backgroundColor: "#fff",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  registerInput: {
+    height: 50,
+    flex: 1,
     padding: 10,
   }
 });
