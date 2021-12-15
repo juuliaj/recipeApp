@@ -17,7 +17,6 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // Listen to any changes in 'user' data and set "userReducer's" store to "user.uid"
     //listens to changes in user data 
     const authListener = () => {
         onAuthStateChanged(auth, (user) => {
@@ -30,7 +29,6 @@ export default function Login({ navigation }) {
         })
     };
 
-    // Login if credentials match existing crendentials and if so, set "signInReducer's" store to "true"
     //logs in the user if credential match existing credentials
     const handleLogin = () => {
         try {

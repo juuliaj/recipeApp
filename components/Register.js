@@ -11,7 +11,6 @@ const auth = getAuth();
 
 export default function Register({ navigation }) {
 
-    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
