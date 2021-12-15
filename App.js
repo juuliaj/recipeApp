@@ -14,9 +14,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
+// Initialize Firebase
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+//authorisation stack 
 const AuthStack = () => {
   return (
     <Stack.Navigator>
@@ -43,6 +45,7 @@ const AuthStack = () => {
   );
 };
 
+//the main stack component
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator >
@@ -53,6 +56,7 @@ const MainStackNavigator = () => {
   );
 }
 
+//stack for serach page and recipe
 const SearchStackNavigator = () => {
   return (
     <Stack.Navigator >
@@ -62,23 +66,15 @@ const SearchStackNavigator = () => {
   );
 }
 
+//bottom stack navigator to navigate different pages
 const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator
-    tabBarOptions={{
-       activeTintColor: 'black',
-       activeBackgroundColor: 'rgb(101, 150, 99)',
-       inactiveBackgroundColor: 'rgb(104,168,102)',
-       tabBarStyle: [{
-        "display": "flex"
-       }]
-    }}
->
+    <Tab.Navigator>
       <Tab.Screen 
         name="Frontpage" 
         component={MainStackNavigator} 
         options= {{
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <MaterialCommunityIcons name="food-variant" size={24} color="black" />
           ),
           headerStyle: {
@@ -99,7 +95,7 @@ const BottomTabNavigator = () => {
         name="Search" 
         component={SearchStackNavigator}
         options= {{
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <AntDesign name="search1" size={24} color="black" />
           ),
           headerStyle: {
@@ -120,7 +116,7 @@ const BottomTabNavigator = () => {
         name="Shoppinglist" 
         component={Shoppinglist}
         options= {{
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <AntDesign name="shoppingcart" size={24} color="black" />
           ),
           headerStyle: {
@@ -146,13 +142,13 @@ export default function App() {
 
   const [isSigned, setIsSigned] = useState(false);
 
-  // Update state from redux
+  //updates state from redux
   store.subscribe(() => {
     setIsSigned(store.getState());
   })
 
   return (
-    // Check if 'isSigned' is true and change the path from 'Login' to 'Search' if true    
+    //checks if isSigned is true and then changes the path from login to frontpage   
     <NavigationContainer>
       {isSigned ? <BottomTabNavigator /> : <AuthStack />}
     </NavigationContainer>

@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 350,
     fontSize: 30,
-    borderRadius: 50,
-    padding: 10,
+    borderRadius: 20,
+    padding: 5,
     backgroundColor: 'rgb(255,250,244)',
   },
   ingredientContainer: {
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: 'space-between',
     padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
     fontWeight: "bold"
   },
   shoppingListContainer: {
     flex: 1,
-    width: 350,
     flexDirection: 'row',
     fontSize: 30,
-    borderRadius: 20,
     padding: 10,
     marginTop: 10,
     marginBottom: 10,
@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   recipeContainerBig: {
-    fontSize: 30,
+    fontSize: 40,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    marginLeft: 20,
   },
   loginView: {
     backgroundColor: "#fff",
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
   },
   recipeContainerText: {
     fontSize: 15,
-    padding: 10,
+    padding: 20,
   },
   inputView: {
     backgroundColor: "#fff",

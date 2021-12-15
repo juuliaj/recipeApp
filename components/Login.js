@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Text, View, Image, TextInput, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from "react-native";
+import React, { useState } from "react";
+import { Alert, Text, View, TextInput, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from "react-native";
 import styles from './Styles';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import firebaseConfig from './Firebase';
@@ -18,6 +18,7 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState('');
 
     // Listen to any changes in 'user' data and set "userReducer's" store to "user.uid"
+    //listens to changes in user data 
     const authListener = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -30,6 +31,7 @@ export default function Login({ navigation }) {
     };
 
     // Login if credentials match existing crendentials and if so, set "signInReducer's" store to "true"
+    //logs in the user if credential match existing credentials
     const handleLogin = () => {
         try {
             if (email !== '' && password !== '') {
@@ -61,37 +63,37 @@ export default function Login({ navigation }) {
     }
 
     return (
-            <KeyboardAvoidingView
+        <KeyboardAvoidingView
             style={styles.container}
             behavior="padding">
             <ImageBackground source={require('../assets/backround.png')} resizeMode="cover" style={styles.image}>
                 <View style={styles.loginView}>
-            <Text style={styles.headerContainer}>Welcome to RecipeApp</Text>
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.registerInput}
-                    placeholder="Email"
-                    placeholderTextColor="rgb(116, 144, 147)"
-                    onChangeText={(email) => setEmail(email)}
-                />
-            </View>
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.registerInput}
-                    placeholder="Password"
-                    placeholderTextColor="rgb(116, 144, 147)"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                />
-            </View>
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor: "transparent", padding: 20}} onPress={() => navigation.navigate('Register')}>
-                <Text>No account? Register here</Text>
-            </TouchableOpacity>
-            </View>
+                    <Text style={styles.headerContainer}>Welcome to RecipeApp</Text>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            style={styles.registerInput}
+                            placeholder="Email"
+                            placeholderTextColor="rgb(116, 144, 147)"
+                            onChangeText={(email) => setEmail(email)}
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            style={styles.registerInput}
+                            placeholder="Password"
+                            placeholderTextColor="rgb(116, 144, 147)"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                        />
+                    </View>
+                    <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                        <Text>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ backgroundColor: "transparent", padding: 20 }} onPress={() => navigation.navigate('Register')}>
+                        <Text>No account? Register here</Text>
+                    </TouchableOpacity>
+                </View>
             </ImageBackground>
-            </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
     );
 }

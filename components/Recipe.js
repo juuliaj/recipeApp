@@ -4,6 +4,7 @@ import { ScrollView, Text, View, Image } from 'react-native';
 
 export default function Recipe({ route }) {
 
+  //'meal' gets the selected recipes information and then puts the information into correct places
   const { meal } = route.params;
   const [name, setName] = useState(meal.strMeal);
   const [category, setCategory] = useState(meal.strCategory);
@@ -63,7 +64,7 @@ export default function Recipe({ route }) {
     },
     {
       ingredient: meal.strIngredient14,
-      amount: meal.strMeasure12,
+      amount: meal.strMeasure14,
     },
     {
       ingredient: meal.strIngredient15,
@@ -91,11 +92,13 @@ export default function Recipe({ route }) {
     },
   ]);
 
+
+  //renders the recipes information
   ingredientList = () => {
-    return ingredients?.map((item) => {
+    return ingredients?.map((item, index) => {
       if (item.ingredient != "" && item.amount != "") {
         return (
-          <View style={styles.ingredientContainer}>
+          <View style={styles.ingredientContainer} key={index}>
             <Text>{item.ingredient}</Text>
             <Text>{item.amount}</Text>
           </View>
@@ -113,7 +116,8 @@ export default function Recipe({ route }) {
             width: 380,
             height: 380,
             borderRadius: 15,
-            marginLeft: 5
+            marginLeft: 5,
+            marginLeft: 20,
           }}
           source={{ uri: meal.strMealThumb }}
           resizeMode='contain'

@@ -15,7 +15,7 @@ export default function Register({ navigation }) {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
-    // Creates user if valid credentials and navigates back to 'Login' page
+    //creates new user if credentials are correct
     const createNewUser = () => {
         try {
             if (email !== '' && password !== '') {
@@ -48,32 +48,32 @@ export default function Register({ navigation }) {
             style={styles.container}
             behavior="padding">
             <ImageBackground source={require('../assets/backround.png')} resizeMode="cover" style={styles.image}>
-            <View style={styles.loginView}>
-                <Text style={styles.headerContainer}>Please type in your credentials</Text>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.registerInput}
-                        value={email}
-                        placeholder="Email"
-                        placeholderTextColor="rgb(116, 144, 147)"
-                        onChangeText={(email) => setEmail(email)}
-                        style={styles.registerInput}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.registerInput}
-                        value={password}
-                        placeholder="Password"
-                        placeholderTextColor="rgb(116, 144, 147)"
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                        style={styles.registerInput}
-                    />
-                </View>
-                <TouchableOpacity onPress={createNewUser} style={styles.button}>
-                    <Text>Create user</Text>
-                </TouchableOpacity>
+                <View style={styles.loginView}>
+                    <Text style={styles.headerContainer}>Please type in your credentials</Text>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            style={styles.registerInput}
+                            value={email}
+                            placeholder="Email"
+                            placeholderTextColor="rgb(116, 144, 147)"
+                            onChangeText={(email) => setEmail(email)}
+                            style={styles.registerInput}
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            style={styles.registerInput}
+                            value={password}
+                            placeholder="Password"
+                            placeholderTextColor="rgb(116, 144, 147)"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                            style={styles.registerInput}
+                        />
+                    </View>
+                    <TouchableOpacity onPress={createNewUser} style={styles.button}>
+                        <Text>Create user</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         </KeyboardAvoidingView>
