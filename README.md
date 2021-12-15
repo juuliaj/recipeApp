@@ -11,4 +11,5 @@ so you can add missing ingredients to it. All of the users have their own databa
 ## Built with
 - [Expo](https://expo.dev/)
 - [React Native](https://reactnative.dev/)
+- [Firebase](https://firebase.google.com)
 
